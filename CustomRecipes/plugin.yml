@@ -1,0 +1,12 @@
+version: 1.0
+api-version: 1.13
+name: CustomRecipes
+main: com.infinitymeme.customrecipes.Main
+author: infinitymeme
+description: Custom recipes and item utilities.
+commands:
+    setname:
+        aliases: [ri]
+        description: Renames the hand item. Allows color codes.
+        permission: customrecipes.rename
+        usage: "Usage: /setname [item name]"

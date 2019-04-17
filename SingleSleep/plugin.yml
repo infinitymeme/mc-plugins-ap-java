@@ -1,0 +1,5 @@
+version: 1.0
+name: SingleSleep
+main: com.infinitymeme.singlesleep.Main
+author: infinitymeme
+description: Allows the time to change with only a single player sleeping

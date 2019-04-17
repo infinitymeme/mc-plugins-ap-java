@@ -1,0 +1,6 @@
+version: 1.0
+api-version: 1.13
+name: GrapplingHook
+main: com.infinitymeme.grapplinghook.Main
+author: infinitymeme
+description: Allows players to craft and use grappling hooks.

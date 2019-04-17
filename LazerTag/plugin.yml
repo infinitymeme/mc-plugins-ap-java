@@ -1,0 +1,16 @@
+version: 1.0
+api-version: 1.13
+name: LazerTag
+main: com.infinitymeme.lazertag.Main
+author: infinitymeme
+description: its lazer tag bois
+commands:
+    ltspawn:
+        aliases: []
+        description: set a team's spawn point
+        permission: lazertag.setteamspawns
+        usage: "Usage: /ltspawn [red:blue]"
+    team:
+        aliases: []
+        description: set a player's team
+        usage: "Usage: /team [red:blue:none]"
