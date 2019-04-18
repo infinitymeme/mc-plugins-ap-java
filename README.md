@@ -51,3 +51,13 @@ Notice that unlike a PlayerInteractEvent, this can trigger for any entity, so we
 
 ## Delay and Looping
 
+Minecraft runs at 20 ticks per second, and waits for your code to execute before proceeding to the next tick. This creates a problem if you happen to create an infinite loop. Instead, if you wish to create any events that take course over a period of time, such as a constant homing effect, you must use a loop with a delay.
+
+### Delay Function
+Waits the specified amount of time, executes the code within, then proceeds to the next lines of code.
+```java
+Bukkit.getScheduler().runTaskLater(this, new Runnable() {public void run() {
+  //your code here
+}},DELAY_IN_TICKS);
+```
+Note, this does not run correctly within a typical for loop.
