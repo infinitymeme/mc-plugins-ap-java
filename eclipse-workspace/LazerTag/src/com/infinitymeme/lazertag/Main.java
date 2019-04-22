@@ -112,8 +112,8 @@ public class Main extends JavaPlugin implements Listener {
 	}
 	
 	@EventHandler
-	public void onDamage(EntityDamageEvent e) { //fall damage canceler
-		if ((e.getEntity() instanceof Player)&&(e.getCause().equals(DamageCause.FALL))) {
+	public void onDamage(EntityDamageEvent e) { //fall damage canceler for those playing
+		if ((e.getEntity() instanceof Player)&&(e.getCause().equals(DamageCause.FALL))&&teamValue((Player)e.getEntity())!=0) {
 			e.setCancelled(true);
 		}
 	}

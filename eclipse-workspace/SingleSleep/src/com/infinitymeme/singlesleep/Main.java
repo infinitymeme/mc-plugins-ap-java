@@ -33,24 +33,16 @@ public class Main extends JavaPlugin implements Listener {
 	}
 	
 	public void sleeptick(World w) {
-		new BukkitRunnable() {
-	        
-            @Override
-            public void run() {
-//            	Bukkit.broadcastMessage("tick");
-            	if (thread_cancel > 0) {
-//            		Bukkit.broadcastMessage("canceled");
-        			thread_cancel--;
-        		} else {
-	        		if (sleeping > 0) {
-	            		w.setTime(w.getTime()+(FF_SPEED*TICKS_BETWEEN));
-	            		sleeptick(w);
-	            	}
+		Bukkit.getScheduler().runTaskLater(this, new Runnable() {public void run() {
+        	if (thread_cancel > 0) {
+    			thread_cancel--;
+    		} else {
+        		if (sleeping > 0) {
+            		w.setTime(w.getTime()+(FF_SPEED*TICKS_BETWEEN));
+            		sleeptick(w);
         		}
-            }
-                
-            
-        }.runTaskLater(this, TICKS_BETWEEN);
+    		}
+        }}, TICKS_BETWEEN);
 		
 	}
 	
@@ -82,9 +74,7 @@ public class Main extends JavaPlugin implements Listener {
 	public void onLeaveBed(PlayerBedLeaveEvent e) {
 		if (sleeping > 0) {
 			sleeping--;
-//			Bukkit.broadcastMessage("nevermind (remaining "+Integer.toString(sleeping)+")");
 			if (sleeping == 0) {
-//				Bukkit.broadcastMessage("total nevermind");
 				long time = e.getPlayer().getWorld().getTime();
 				if (!((time >= 12541)&&(time <= 23458))) {
 					Bukkit.broadcastMessage(ChatColor.YELLOW + "Rise and shine!");

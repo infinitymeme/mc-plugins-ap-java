@@ -50,6 +50,7 @@ public class Main extends JavaPlugin implements Listener {
 	@Override
 	public void onEnable() {
 		Bukkit.getPluginManager().registerEvents(this, this);
+		recursivecooldown = 0;
 		loadNametag();
 		loadFlint();
 		loadSmoothstone();
@@ -67,9 +68,9 @@ public class Main extends JavaPlugin implements Listener {
 	
 	@EventHandler
 	public void onDrop(PlayerDropItemEvent e) {
-		ItemStack drop = e.getItemDrop().getItemStack();
 		ItemStack hand = e.getPlayer().getInventory().getItemInMainHand();
 		if (hand.getType().equals(Material.AIR)) {
+			ItemStack drop = e.getItemDrop().getItemStack();
 			ItemMeta meta = drop.getItemMeta();
 			if (meta != null) {
 				if (meta.getDisplayName().equals(ChatColor.GOLD+"Fastbuild Wand")) {
@@ -170,7 +171,6 @@ public class Main extends JavaPlugin implements Listener {
 					} else {
 						recursivecooldown = 5;
 						recursiveCooldown(p);
-						//TODO recursive
 						String action = e.getAction().name();
 						if (action.equals("RIGHT_CLICK_BLOCK")&&(e.isBlockInHand())) {
 							BlockFace bf = e.getBlockFace();
@@ -239,7 +239,7 @@ public class Main extends JavaPlugin implements Listener {
 		}
 	}
 	
-	public void recursiveFill(Player p, BlockData bd, Block b, Vector v, int gox, int goy, int goz) {//TODO
+	public void recursiveFill(Player p, BlockData bd, Block b, Vector v, int gox, int goy, int goz) {
 		if (p.getLocation().distance(b.getLocation()) <= MAX_BUILDRANGE) {
 			ItemStack hand = p.getInventory().getItemInOffHand();
 			if (hand != null) {
@@ -274,7 +274,7 @@ public class Main extends JavaPlugin implements Listener {
 		
 	}
 	
-	public void recursiveBreak(Player p, BlockData bd, Block b, Vector v, int gox, int goy, int goz) {//TODO
+	public void recursiveBreak(Player p, BlockData bd, Block b, Vector v, int gox, int goy, int goz) {
 		if (p.getLocation().distance(b.getLocation()) <= MAX_BUILDRANGE) {
 			ItemStack hand = p.getInventory().getItemInOffHand();
 			if (hand != null) {

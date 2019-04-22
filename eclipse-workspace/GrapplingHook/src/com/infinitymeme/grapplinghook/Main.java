@@ -11,16 +11,13 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -31,7 +28,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
 import net.md_5.bungee.api.ChatColor;
-import net.minecraft.server.v1_13_R2.EntityArrow.PickupStatus;
 
 public class Main extends JavaPlugin implements Listener {
 
@@ -166,10 +162,6 @@ public class Main extends JavaPlugin implements Listener {
 			p.getWorld().spawnParticle(Particle.CRIT, pl, 1, 0, 0, 0, 0);
 			pl.add(homingvector(pl, a.getLocation()));
 		}
-	}
-	
-	public double distance(Entity a, Entity b) {
-		return a.getLocation().distance(b.getLocation());
 	}
 	
 	public void loadGhook() {
