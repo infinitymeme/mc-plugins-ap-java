@@ -11,7 +11,7 @@
 Note that these instructions are for Windows devices only. Minecraft servers cannot be run on macOS.
 
 ## Downloading the Main Repository
-Download this entire repository by clicking on the green "Clone or Download" button and "Download ZIP".
+Download this entire repository by clicking on the green "Clone or Download" button and "Download ZIP". Once it downloads, right click on the zip file and click "Extract All". Extract it to somewhere you'll remember it, we'll be needing its files later.
 
 ![Download the Repository](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap01.png?raw=true)
 
@@ -24,8 +24,16 @@ Accept the License Agreement, and then download ```jdk-11.02_windows-x64_bin.exe
 
 You may need to make an Oracle account to download it. I just used my student email.
 
+Once it downloads, run the executable. Just click next through everything, there are no settings you need to change.
+
 ## Installing Eclipse
-Nothing yet.
+Visit the [Eclipse Downloads Page](https://www.eclipse.org/downloads/packages/) and download the Windows version of the "Eclipse IDE for Java Developers". The file should be called ```eclipse-java-20XX-XX-R-win32-x86_64.zip```
+
+![Download Eclipse](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap03.png?raw=true)
+
+Once it downloads, extract the zip file and move the ```eclipse``` folder somewhere you want it. This is a standalone application. I put mine on my desktop.
+
+Run the ```eclipse.exe``` file inside of the folder. Just leave the workspace as the default. Once it boots to the welcome page, you can close the app.
 
 ## Setting up the Server
 Nothing yet.
