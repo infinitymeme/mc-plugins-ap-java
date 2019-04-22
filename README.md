@@ -7,6 +7,20 @@
 
 [Spigot API Downloads](https://getbukkit.org/download/spigot)
 
+# Installation Instructions
+Note that these instructions are for Windows devices only. Minecraft servers cannot be run on macOS.
+## Downloading the Main Repository
+Download this entire repository by clicking on the green "Clone or Download" button and "Download ZIP".
+![Download the Repository](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap01.png?raw=true)
+## Installing Java SE 11
+Visit the [Java SE Downloads Page](https://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase11-5116896.html).
+![Download Java SE 11](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap02.png?raw=true)
+Accept the License Agreement, and then download ```jdk-11.02_windows-x64_bin.exe```
+You may need to make an Oracle account to download it. I just used my student email.
+## Installing Eclipse
+Nothing yet.
+## Setting up the Server
+Nothing yet.
 
 # Useful Techniques
 Making plugins all comes down to creativity, both in the function of the plugin and in the design of its code. This section gives templates of techniques to get what you want done quickly and efficiently.
