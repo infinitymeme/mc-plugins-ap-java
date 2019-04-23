@@ -31,9 +31,25 @@ Visit the [Eclipse Downloads Page](https://www.eclipse.org/downloads/packages/) 
 
 ![Download Eclipse](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap03.png?raw=true)
 
+Download the Windows version of the "Eclipse IDE for Java Developers". The file should be called `eclipse-java-20XX-XX-R-win32-x86_64.zip`
+
 Once it downloads, extract the zip file and move the `eclipse` folder somewhere you want it. This is a standalone application. I put mine on my desktop.
 
 Run the `eclipse.exe` file inside of the folder. Just leave the workspace as the default. Once it boots to the welcome page, you can close the app.
+
+## Installing Minecraft
+Visit the [Minecraft Download Page](https://my.minecraft.net/en-us/store/minecraft/) and sign in to your minecraft account.
+
+You should see the ![Download Minecraft](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap04.png?raw=true) button if you have signed in and purchased the game.
+
+Download and run ```MinecraftInstaller.msi```. The default install settings are fine.
+
+## Installing Optifine (Optional)
+Although this is an optional step, it is highly recommended because it will result in better client performance across all computers.
+
+Visit the [Optifine Downloads Page]().
+
+![Download Optifine]()
 
 ## Setting up the Server
 Nothing yet.
