@@ -123,10 +123,7 @@ Or what about an event that occurs after it finishes? What if we want an alarm n
 
 Or what about a while loop with an end condition? We can't check end conditions every tick because all the future ticks are scheduled instantly, so what do we do?
 
-
-**Recursion**
-
-*don't worry, it isn't as bad as you'd expect*
+[Recursion Time](https://www.google.com/search?q=recursion)
 
 ### Recursive use of the Delay Function
 
