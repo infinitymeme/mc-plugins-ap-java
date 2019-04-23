@@ -112,6 +112,7 @@ for (int i=1; i<=5; i++) {
 Bukkit.broadcastMessage(getTime()+"Done!");
 ```
 Here's the output:
+
 ![Countdown Results](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/delay01.png?raw=true)
 
 Please note that you cannot use `i` inside the delayed calls since Java doesn't know whether or not `i` will have been garbage collected due to the method completing.
