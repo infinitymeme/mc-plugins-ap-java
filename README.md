@@ -111,7 +111,7 @@ for (int i=1; i<=5; i++) {
 }
 Bukkit.broadcastMessage(getTime()+"Done!");
 ```
-
+Here's the output:
 ![Countdown Results](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/delay01.png?raw=true)
 
 Please note that you cannot use `i` inside the delayed calls since Java doesn't know whether or not `i` will have been garbage collected due to the method completing.
@@ -124,6 +124,7 @@ Or what about a while loop with an end condition? We can't check end conditions 
 
 
 **Recursion**
+
 *don't worry, it isn't as bad as you'd expect*
 
 ### Recursive use of the Delay Function
