@@ -46,11 +46,11 @@ Download and run `MinecraftInstaller.msi`. The default install settings are fine
 
 Once installed, run the launcher. Currently, Minecraft version 1.14 is the latest version (just released!), but we want version 1.13.2.
 
-To set this up, switch over to the Launch options tab in the launcher. Click the plus and add another launch profile, and set the game version to release 1.13.2.
+To set this up, click the three bars at the top right and switch over to the Launch options tab. Click the plus and add another launch profile, and set the game version to release 1.13.2.
 
-Give it a name, and click Save. Switch back over to the News tab, and click the up arrow next to the Run button, and select the new launch profile you added.
+Give it a name, and click Save. Switch back over to the News tab, and click the up arrow next to the Play button, and select the new launch profile you added.
 
-Click the run button, and the game will install and boot. You can close the game and launcher once you reach the title page.
+Click the Play button, and the game will install and boot. You can close the game and launcher once you reach the title page.
 
 ## Installing Optifine (Optional)
 Although this is an optional step, it is highly recommended because it will result in better client performance across all computers.
@@ -63,7 +63,7 @@ Download the latest version of Optifine for Minecraft 1.13.2. Your file should b
 
 Chrome may ask you if you want to keep the file, if so, click "Keep".
 
-Run the file, and click install. 
+Run the file, and click install.
 
 ## Setting up the Server
 Nothing yet.
