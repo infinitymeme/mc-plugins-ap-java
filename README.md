@@ -31,7 +31,7 @@ Visit the [Eclipse Downloads Page](https://www.eclipse.org/downloads/packages/) 
 
 ![Download Eclipse](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap03.png?raw=true)
 
-Download the Windows version of the "Eclipse IDE for Java Developers". The file should be called `eclipse-java-20XX-XX-R-win32-x86_64.zip`
+Download the Windows version of the "Eclipse IDE for Java Developers". The file should be called `eclipse-java-20##-##-R-win32-x86_64.zip`
 
 Once it downloads, extract the zip file and move the `eclipse` folder somewhere you want it. This is a standalone application. I put mine on my desktop.
 
@@ -40,16 +40,30 @@ Run the `eclipse.exe` file inside of the folder. Just leave the workspace as the
 ## Installing Minecraft
 Visit the [Minecraft Download Page](https://my.minecraft.net/en-us/store/minecraft/) and sign in to your minecraft account.
 
-You should see the ![Download Minecraft](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap04.png?raw=true) button if you have signed in and purchased the game.
+You should see the Download Minecraft button if you have signed in and purchased the game.
 
-Download and run ```MinecraftInstaller.msi```. The default install settings are fine.
+Download and run `MinecraftInstaller.msi`. The default install settings are fine.
+
+Once installed, run the launcher. Currently, Minecraft version 1.14 is the latest version (just released!), but we want version 1.13.2.
+
+To set this up, switch over to the Launch options tab in the launcher. Click the plus and add another launch profile, and set the game version to release 1.13.2.
+
+Give it a name, and click Save. Switch back over to the News tab, and click the up arrow next to the Run button, and select the new launch profile you added.
+
+Click the run button, and the game will install and boot. You can close the game and launcher once you reach the title page.
 
 ## Installing Optifine (Optional)
 Although this is an optional step, it is highly recommended because it will result in better client performance across all computers.
 
-Visit the [Optifine Downloads Page]().
+Visit the [Optifine Downloads Page](https://optifine.net/downloads).
 
-![Download Optifine]()
+![Download Optifine](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap04.png?raw=true)
+
+Download the latest version of Optifine for Minecraft 1.13.2. Your file should be called `OptiFine_1.13.2_HD_U_E#`.
+
+Chrome may ask you if you want to keep the file, if so, click "Keep".
+
+Run the file, and click install. 
 
 ## Setting up the Server
 Nothing yet.
