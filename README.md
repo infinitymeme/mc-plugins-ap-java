@@ -59,7 +59,7 @@ Visit the [Optifine Downloads Page](https://optifine.net/downloads).
 
 ![Download Optifine](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap04.png?raw=true)
 
-Download the latest version of Optifine for Minecraft 1.13.2. Your file should be called `OptiFine_1.13.2_HD_U_E#`.
+Download the latest version of Optifine for Minecraft 1.13.2. Make sure you use the `(mirror)` button since it avoids the bit.ly ads. Your file should be called `OptiFine_1.13.2_HD_U_E#`.
 
 Chrome may ask you if you want to keep the file, if so, click "Keep".
 
