@@ -27,7 +27,7 @@ You may need to make an Oracle account to download it. I just used my student em
 Once it downloads, run the executable. Just click next through everything, there are no settings you need to change.
 
 ## Installing Eclipse
-Visit the [Eclipse Downloads Page](https://www.eclipse.org/downloads/packages/) and download the Windows version of the "Eclipse IDE for Java Developers". The file should be called `eclipse-java-20XX-XX-R-win32-x86_64.zip`
+Visit the [Eclipse Downloads Page](https://www.eclipse.org/downloads/packages/)
 
 ![Download Eclipse](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap03.png?raw=true)
 
