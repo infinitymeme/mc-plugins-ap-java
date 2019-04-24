@@ -157,4 +157,35 @@ Or what about a while loop with an end condition? We can't check end conditions 
 
 ### Recursive use of the Delay Function
 
+Here's a full-fledged timer class example. Since we don't really want to have to initialize a timer object, we'll just make it an entirely static class. That means that in our main class we can just do `Timer.startTimer(5);` to use it.
 
+```java
+public class Timer() {
+
+	public static void startTimer(int seconds) {
+		Bukkit.broadcastMessage(getTime()+"Timer started!");
+		timerloop(seconds,seconds);
+	}
+		
+	private static String getTime() {
+		return "["+Bukkit.getServer().getWorlds().get(0).getTime()+"] ";
+	}
+
+	private void timerloop(int s, int start) {
+		if (s > 0) {
+			Bukkit.broadcastMessage(getTime()+"*tick* ("+(start-s)+"s)");
+			Bukkit.getScheduler().runTaskLater(this, new Runnable() {public void run() {
+				timerloop(s-1,start); //recursive step
+			}},20); //static delay of 1s between iterations
+		} else { //exit condition
+			Bukkit.broadcastMessage(getTime()+"*DING*");
+		}
+	}
+}
+```
+
+Here's the output:
+
+![Countdown Results](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/delay02.png?raw=true)
+
+Pretty clean right? We even can say how many seconds it has been and do a special message when the timer ends. We couldn't do that before with the for loop.
