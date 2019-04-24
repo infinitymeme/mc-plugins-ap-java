@@ -27,6 +27,7 @@ You may need to make an Oracle account to download it. I just used my student em
 Once it downloads, run the executable. Just click next through everything, there are no settings you need to change.
 
 ## Installing Eclipse
+
 Visit the [Eclipse Downloads Page](https://www.eclipse.org/downloads/packages/).
 
 ![Download Eclipse](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap03.png?raw=true)
