@@ -53,13 +53,13 @@ Give it a name, and click Save. Switch back over to the News tab, and click the 
 Click the Play button, and the game will install and boot. You can close the game and launcher once you reach the title page.
 
 ## Installing Optifine (Optional)
-Although this is an optional step, it is highly recommended because it will result in better client performance across all computers.
+Although this is an optional step, it is **highly recommended** because it will result in better client performance across all computers.
 
 Visit the [Optifine Downloads Page](https://optifine.net/downloads).
 
 ![Download Optifine](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap04.png?raw=true)
 
-Download the latest version of Optifine for Minecraft 1.13.2. Make sure you use the `(mirror)` button since it avoids the bit.ly ads. Your file should be called `OptiFine_1.13.2_HD_U_E#`.
+Download the latest version of Optifine for Minecraft 1.13.2. Make sure you use the `(mirror)` button since it avoids the bit.ly ads. Your file should be called `OptiFine_1.13.2_HD_U_E#.jar`.
 
 Chrome may ask you if you want to keep the file, if so, click "Keep".
 
