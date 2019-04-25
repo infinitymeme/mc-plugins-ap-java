@@ -34,7 +34,7 @@ Visit the [Eclipse Downloads Page](https://www.eclipse.org/downloads/packages/).
 
 ![Download Eclipse](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap03.png?raw=true)
 
-Download the Windows version of the "Eclipse IDE for Java Developers". The file should be called `eclipse-java-20##-##-R-win32-x86_64.zip`
+Download the latest Windows version of the "Eclipse IDE for Java Developers". The file should be called `eclipse-java-20##-##-R-win32-x86_64.zip`
 
 Once it downloads, extract the zip file and move the `eclipse` folder somewhere you want it. This is a standalone application. I put mine on my desktop.
 
@@ -53,7 +53,7 @@ To set this up, click the three bars at the top right and switch over to the Lau
 
 Give it a name, and click Save. Switch back over to the News tab, and click the up arrow next to the Play button, and select the new launch profile you added.
 
-Click the Play button, and the game will install and boot. You can close the game and launcher once you reach the title page.
+Click the Play button, and the game will perform a first-boot. You can close the game and launcher once you reach the title page.
 
 ## Installing Optifine (Optional)
 Although this is an optional step, it is **highly recommended** because it will result in better client performance across all computers.
@@ -75,7 +75,12 @@ This will set up another launch profile in the Minecraft launcher.
 Make sure that when you boot the game next time you use the Optifine launch profile.
 
 ## Setting up the Server
-Nothing yet.
+Get the boot files.zip 
+Extract it into a folder
+Run the `run.bat` file.
+The server will fail to boot because the EULA has not been agreed to.
+Minimize the console and go open the `eula.txt` that appeared int the directory.
+Change the thing to true. Switch back to the console
 
 # Useful Techniques
 Making plugins all comes down to creativity, both in the function of the plugin and in the design of its code. This section gives templates of techniques to get what you want done quickly and efficiently.
