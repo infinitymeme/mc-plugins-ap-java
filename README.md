@@ -198,3 +198,7 @@ Here's the output:
 ![Countdown Results](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/delay02.png?raw=true)
 
 Pretty clean right? We even can say how many seconds it has been and do a special message when the timer ends. We couldn't do that before with the for loop.
+
+Notice that any static data (in this case the initial amount of starting seconds) must be carried through local variables alongside the dynamic data (in this case the remaining seconds).
+
+You can find examples of this across all of the provided plugins, but most are too complex to explain concisely here.
