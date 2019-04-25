@@ -11,9 +11,11 @@
 Note that these instructions are for Windows devices only. Minecraft servers cannot be run on macOS.
 
 ## Downloading the Main Repository
-Download this entire repository by clicking on the green "Clone or Download" button and "Download ZIP". Once it downloads, right click on the zip file and click "Extract All". Extract it to somewhere you'll remember it, we'll be needing its files later.
+Download this entire repository by clicking on the green "Clone or Download" button and "Download ZIP".
 
 ![Download the Repository](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap01.png?raw=true)
+
+ Once it downloads, right click on the zip file and click "Extract All". Extract it to somewhere you'll remember it, we'll be needing its files later.
 
 ## Installing Java SE 11
 Visit the [Java SE Downloads Page](https://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase11-5116896.html).
@@ -65,6 +67,12 @@ Download the latest version of Optifine for Minecraft 1.13.2. Make sure you use 
 Chrome may ask you if you want to keep the file, if so, click "Keep".
 
 Run the file, and click install.
+
+This will set up another launch profile in the Minecraft launcher.
+
+![Launch Profiles](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap05.png?raw=true)
+
+Make sure that when you boot the game next time you use the Optifine launch profile.
 
 ## Setting up the Server
 Nothing yet.
