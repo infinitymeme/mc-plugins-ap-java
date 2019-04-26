@@ -94,7 +94,10 @@ Launch minecraft, and click multiplayer on the title screen. Click direct connec
 Once you join the server, switch over to the console and type `op yournamehere`. You can now execute any commands you want in-game, like `/gamemode creative`.
 
 **Optional: Offline Server Mode**
-If you find yourself being unable to connect to the server because you could not authenticate with minecraft.net, you can turn on offline mode in the server settings. 
+
+If you find yourself being unable to connect to the server because you could not authenticate with minecraft.net (because it was blocked on school wi-fi, or because you aren't connected to a network), you can turn on offline mode in the server settings. 
+
+Note that this only works if you have signed into your minecraft account in the launcher before.
 
 Navigate to where the `run.bat` file is and find a file called `server.properties` within the directory. Open it and find the line toward the bottom that says `online-mode=true`. Change it to `online-mode=false` and save the file.
 
