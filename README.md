@@ -79,11 +79,11 @@ Navigate to the location where you downloaded this repository. Extract the `Star
 
 Rename the folder it extracted to from `Startup Files` to `Minecraft Server` or whatever you want your server folder to be called.
 
-Navigate into the `server` folder and run `run.bat`. This will open a console window, which is the server running. It will eventully stop with an error.
+Navigate into the `server` folder and run `start.bat`. This will open a console window, which is the server running. It will eventully stop with an error.
 
 ![Server Error](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap06.png?raw=true)
 
-Like the error says, you haven't agreed to the EULA. Minimize (not close!) the console and there will be a `eula.txt` in the same directory where the `run.bat` file was.
+Like the error says, you haven't agreed to the EULA. Minimize (not close!) the console and there will be a `eula.txt` in the same directory where the `start.bat` file was.
 
 To agree to the EULA, you just have to change `eula=false` on the last line of the text file to `eula=true`. Make sure you save the file.
 
@@ -99,7 +99,7 @@ If you find yourself being unable to connect to the server because you could not
 
 Note that this only works if you have signed into your minecraft account in the launcher before.
 
-Navigate to where the `run.bat` file is and find a file called `server.properties` within the directory. Open it and find the line toward the bottom that says `online-mode=true`. Change it to `online-mode=false` and save the file.
+Navigate to where the `start.bat` file is and find a file called `server.properties` within the directory. Open it and find the line toward the bottom that says `online-mode=true`. Change it to `online-mode=false` and save the file.
 
 Switch over to the console and type `stop`. It will stop and then promp you to restart, so type "y". Once it has restarted, try connecting to it again.
 
