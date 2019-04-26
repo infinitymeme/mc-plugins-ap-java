@@ -75,12 +75,20 @@ This will set up another launch profile in the Minecraft launcher.
 Make sure that when you boot the game next time you use the Optifine launch profile.
 
 ## Setting up the Server
-Get the boot files.zip 
-Extract it into a folder
-Run the `run.bat` file.
+Navigate to the location where you downloaded this repository. Extract the `Startup Files.zip` file inside it to the location you want your server kept in.
+
+Rename the folder it extracted to from `Startup Files` to `Minecraft Server` or whatever you want your server folder to be called.
+
+Navigate into the `server` folder and run `run.bat`. This will open a console window, which is the server running. It will eventully stop with an error.
+
+![Server Error](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap06.png?raw=true)
+
+**WIP**
+```
 The server will fail to boot because the EULA has not been agreed to.
 Minimize the console and go open the `eula.txt` that appeared int the directory.
 Change the thing to true. Switch back to the console
+```
 
 # Useful Techniques
 Making plugins all comes down to creativity, both in the function of the plugin and in the design of its code. This section gives templates of techniques to get what you want done quickly and efficiently.
