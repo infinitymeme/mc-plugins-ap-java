@@ -83,12 +83,22 @@ Navigate into the `server` folder and run `run.bat`. This will open a console wi
 
 ![Server Error](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap06.png?raw=true)
 
-**WIP**
-```
-The server will fail to boot because the EULA has not been agreed to.
-Minimize the console and go open the `eula.txt` that appeared int the directory.
-Change the thing to true. Switch back to the console
-```
+Like the error says, you haven't agreed to the EULA. Minimize (not close!) the console and there will be a `eula.txt` in the same directory where the `run.bat` file was.
+
+To agree to the EULA, you just have to change `eula=false` on the last line of the text file to `eula=true`. Make sure you save the file.
+
+Once you have agreed to the EULA, switch back over to the console window and type "y" to restart. The server is now running.
+
+Launch minecraft, and click multiplayer on the title screen. Click direct connect, and type in `localhost` as the Server Address.
+
+Once you join the server, switch over to the console and type `op yournamehere`. You can now execute any commands you want in-game, like `/gamemode creative`.
+
+**Optional: Offline Server Mode**
+If you find yourself being unable to connect to the server because you could not authenticate with minecraft.net, you can turn on offline mode in the server settings. 
+
+Navigate to where the `run.bat` file is and find a file called `server.properties` within the directory. Open it and find the line toward the bottom that says `online-mode=true`. Change it to `online-mode=false` and save the file.
+
+Switch over to the console and type `stop`. It will stop and then promp you to restart, so type "y". Once it has restarted, try connecting to it again.
 
 # Useful Techniques
 Making plugins all comes down to creativity, both in the function of the plugin and in the design of its code. This section gives templates of techniques to get what you want done quickly and efficiently.
