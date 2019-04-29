@@ -41,7 +41,7 @@ Once it downloads, extract the zip file and move the `eclipse` folder somewhere 
 Run the `eclipse.exe` file inside of the folder. Just leave the workspace as the default. Once it boots to the welcome page, you can close the app.
 
 ## Installing Minecraft
-Visit the [Minecraft Download Page](https://my.minecraft.net/en-us/download/)
+Visit the [Minecraft Download Page](https://my.minecraft.net/en-us/download/),
 
 Download and run `MinecraftInstaller.msi`. The default install settings are fine.
 
@@ -91,7 +91,7 @@ Once you have agreed to the EULA, switch back over to the console window and typ
 
 Launch minecraft, and click multiplayer on the title screen. Click direct connect, and type in `localhost` as the Server Address.
 
-Once you join the server, switch over to the console and type `op yournamehere`. You can now execute any commands you want in-game, like `/gamemode creative`.
+Once you join the server, switch over to the console and type `op yourusernamehere`. You can now execute any commands you want in-game, like `/gamemode creative`.
 
 **Optional: Offline Server Mode**
 
