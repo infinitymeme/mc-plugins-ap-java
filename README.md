@@ -41,13 +41,13 @@ Once it downloads, extract the zip file and move the `eclipse` folder somewhere 
 Run the `eclipse.exe` file inside of the folder. Just leave the workspace as the default. Once it boots to the welcome page, you can close the app.
 
 ## Installing Minecraft
-Visit the [Minecraft Download Page](https://my.minecraft.net/en-us/store/minecraft/) and sign in to your minecraft account.
-
-You should see the Download Minecraft button if you have signed in and purchased the game.
+Visit the [Minecraft Download Page](https://my.minecraft.net/en-us/download/)
 
 Download and run `MinecraftInstaller.msi`. The default install settings are fine.
 
-Once installed, run the launcher. Currently, Minecraft version 1.14 is the latest version (just released!), but we want version 1.13.2.
+Once installed, run the launcher and sign in.
+
+Currently, Minecraft version 1.14 is the latest version (just released!), but we want version 1.13.2.
 
 To set this up, click the three bars at the top right and switch over to the Launch options tab. Click the plus and add another launch profile, and set the game version to release 1.13.2.
 
