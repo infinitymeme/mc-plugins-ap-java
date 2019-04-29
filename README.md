@@ -103,6 +103,8 @@ Navigate to where the `start.bat` file is and find a file called `server.propert
 
 Switch over to the console and type `stop`. It will stop and then promp you to restart, so type "y". Once it has restarted, try connecting to it again.
 
+Note: If you enable this mode, the server will identify your username as a new player, so you will have to re-op yourself. Your inventory will also reset.
+
 # Useful Techniques
 Making plugins all comes down to creativity, both in the function of the plugin and in the design of its code. This section gives templates of techniques to get what you want done quickly and efficiently.
 
