@@ -238,7 +238,7 @@ public void whateverYouWantToCallIt(EventObject e) {
 ```
 
 The event object has all of the properties you might need to interact with the event.
-Here's a very simple example from the `GrapplingHook` plugin which cancels fall damage as long as a player is grappling.
+Here's a very simple example from the `LazerTag` plugin which cancels fall damage as long as a player is playing. This lets the map be more vertically-oriented.
 
 ```java
 @EventHandler
@@ -336,8 +336,42 @@ Notice that any static data (in this case the initial amount of starting seconds
 
 You can find examples of this across all of the provided plugins, but most are too complex to explain concisely here.
 
+## Homing Vector
+Generates a vector from location 1 to location 2. This function is useful for setting the velocity (vector) of entities, making them home to a particular location. You might find other uses for it too.
+```java
+public Vector homingvector(Location l1, Location l2) {
+	Vector v = l2.toVector().subtract(l1.toVector());
+	v = v.multiply(1/(l1.toVector().distance(l2.toVector())));
+	return v;
+}
+```
+Example to make an arrow fly at a player's head:
+```java
+Arrow a = //some arrow from somewhere;
+Player p = //some player from somewhere;
+//set arrow's velocity to 3x the vector FROM arrow TO player eyes
+a.setVelocity(homingvector(a.getLocation(), p.getEyeLocation()).multiply(3));
+```
 
-# Exporting projects
+## Action Bar Message
+This function is useful for sending a message to the player through the action bar. It supports ampersand color codes such as `&6` (gold). See the reference chart below for those.
+```java
+public void actionBar(String msg, Player p) { 
+	msg = msg.replace('&', '§');
+	PacketPlayOutTitle packet = new PacketPlayOutTitle(
+			EnumTitleAction.ACTIONBAR,
+			ChatSerializer.a("{\"text\":\"" +msg+ "\"}"),
+			10,
+			1,
+			10
+			);
+	((CraftPlayer)p).getHandle().playerConnection.sendPacket(packet);
+}
+```
+![Color Codes Chart](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/colorcodes.png?raw=true)
+Note that the function replaces the ampersand `&` with the section symbol `§` for convenience. You will need to modify it if you wish to use the symbol normally.
+
+# Exporting Projects
 
 1. Right click on the project folder (for example, `DemoPath`)
 1. Select `Export`
