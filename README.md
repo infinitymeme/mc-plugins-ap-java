@@ -77,6 +77,27 @@ Make sure that when you boot the game next time you use the Optifine launch prof
 ## Setting up the Server
 Nothing yet.
 
+# Setting up eclipse
+
+Start eclipse. Uncheck `Show Welcome Screen` box and close the welcome window.
+
+### Getting rid of extra windows
+
+Close all windows except for the `Project Explorer` and `Navigator` windows, which I prefer to leave on the left side. If one of these windows is missing, go under `Window`>`Show View`> and select the missing one.
+
+### Importing this repository's demo projects
+Close eclipse and navigate to your eclipse workspace. This will likely be at `C:\Users\YourLoginAccount\eclipse-workspace\`. Copy the contents of this repository's `eclipse-workspace` folder to your `eclipse-workspace` folder.
+
+### Placing your API jar in a convenient location (Optional)
+If you are the administrator on your computer, you may want to place your `spigot-1.13.2.jar` file, which is required to export your plugins, in a convenient location. Head to your `C:\` directory and make a new folder called `Eclipse-APIs` and drop the `spigot-1.13.2.jar` file here.
+
+By doing this, the demo plugins will work **out of the box** without any build path configuration.
+
+# Creating projects
+
+// TODO
+
+
 # Useful Techniques
 Making plugins all comes down to creativity, both in the function of the plugin and in the design of its code. This section gives templates of techniques to get what you want done quickly and efficiently.
 
