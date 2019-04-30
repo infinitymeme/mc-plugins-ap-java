@@ -34,26 +34,26 @@ Visit the [Eclipse Downloads Page](https://www.eclipse.org/downloads/packages/).
 
 ![Download Eclipse](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap03.png?raw=true)
 
-Download the Windows version of the "Eclipse IDE for Java Developers". The file should be called `eclipse-java-20##-##-R-win32-x86_64.zip`
+Download the latest Windows version of the "Eclipse IDE for Java Developers". The file should be called `eclipse-java-20##-##-R-win32-x86_64.zip`
 
 Once it downloads, extract the zip file and move the `eclipse` folder somewhere you want it. This is a standalone application. I put mine on my desktop.
 
 Run the `eclipse.exe` file inside of the folder. Just leave the workspace as the default. Once it boots to the welcome page, you can close the app.
 
 ## Installing Minecraft
-Visit the [Minecraft Download Page](https://my.minecraft.net/en-us/store/minecraft/) and sign in to your minecraft account.
-
-You should see the Download Minecraft button if you have signed in and purchased the game.
+Visit the [Minecraft Download Page](https://my.minecraft.net/en-us/download/),
 
 Download and run `MinecraftInstaller.msi`. The default install settings are fine.
 
-Once installed, run the launcher. Currently, Minecraft version 1.14 is the latest version (just released!), but we want version 1.13.2.
+Once installed, run the launcher and sign in.
+
+Currently, Minecraft version 1.14 is the latest version (just released!), but we want version 1.13.2.
 
 To set this up, click the three bars at the top right and switch over to the Launch options tab. Click the plus and add another launch profile, and set the game version to release 1.13.2.
 
 Give it a name, and click Save. Switch back over to the News tab, and click the up arrow next to the Play button, and select the new launch profile you added.
 
-Click the Play button, and the game will install and boot. You can close the game and launcher once you reach the title page.
+Click the Play button, and the game will perform a first-boot. You can close the game and launcher once you reach the title page.
 
 ## Installing Optifine (Optional)
 Although this is an optional step, it is **highly recommended** because it will result in better client performance across all computers.
@@ -75,7 +75,35 @@ This will set up another launch profile in the Minecraft launcher.
 Make sure that when you boot the game next time you use the Optifine launch profile.
 
 ## Setting up the Server
-Nothing yet.
+Navigate to the location where you downloaded this repository. Extract the `Startup Files.zip` file inside it to the location you want your server kept in.
+
+Rename the folder it extracted to from `Startup Files` to `Minecraft Server` or whatever you want your server folder to be called.
+
+Navigate into the `server` folder and run `start.bat`. This will open a console window, which is the server running. It will eventully stop with an error.
+
+![Server Error](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/cap06.png?raw=true)
+
+Like the error says, you haven't agreed to the EULA. Minimize (not close!) the console and there will be a `eula.txt` in the same directory where the `start.bat` file was.
+
+To agree to the EULA, you just have to change `eula=false` on the last line of the text file to `eula=true`. Make sure you save the file.
+
+Once you have agreed to the EULA, switch back over to the console window and type "y" to restart. The server is now running.
+
+Launch minecraft, and click multiplayer on the title screen. Click direct connect, and type in `localhost` as the Server Address.
+
+Once you join the server, switch over to the console and type `op yourusernamehere`. You can now execute any commands you want in-game, like `/gamemode creative`.
+
+**Optional: Offline Server Mode**
+
+If you find yourself being unable to connect to the server because you could not authenticate with minecraft.net (because it was blocked on school wi-fi, or because you aren't connected to a network), you can turn on offline mode in the server settings. 
+
+Note that this only works if you have signed into your minecraft account in the launcher before.
+
+Navigate to where the `start.bat` file is and find a file called `server.properties` within the directory. Open it and find the line toward the bottom that says `online-mode=true`. Change it to `online-mode=false` and save the file.
+
+Switch over to the console and type `stop`. It will stop and then promp you to restart, so type "y". Once it has restarted, try connecting to it again.
+
+Note: If you enable this mode, the server will identify your username as a new player, so you will have to re-op yourself. Your inventory will also reset.
 
 # Setting up eclipse
 
