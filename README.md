@@ -108,27 +108,107 @@ Note: If you enable this mode, the server will identify your username as a new p
 # Setting up eclipse
 
 1. Start eclipse.
-2. Uncheck the `Always show Welcome at start up` box in the bottom right
-3. Close the welcome window.
+1. Uncheck the `Always show Welcome at start up` box in the bottom right
+1. Close the welcome window.
 
 ![Setup Image 1](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/esetup01.png?raw=true)
 
 ### Getting rid of extra windows
 
-Close all windows except for the `Project Explorer` and `Navigator` windows, which I prefer to leave on the left side. If one of these windows is missing, go under `Window`>`Show View`> and select the missing one.
+Close all windows except for the `Project Explorer` and `Navigator` windows, which I prefer to leave on the left side.
 
-### Importing this repository's demo projects
+![Setup Image 2](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/esetup02.png?raw=true)
+
+If one of these windows is missing, go under `Window`>`Show View`> and select the missing one.
+
+![Setup Image 3](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/esetup03.png?raw=true)
+
+### Importing this repository's demo projects (Optional)
 Close eclipse and navigate to your eclipse workspace. This will likely be at `C:\Users\YourLoginAccount\eclipse-workspace\`. Copy the contents of this repository's `eclipse-workspace` folder to your `eclipse-workspace` folder.
 
 ### Placing your API jar in a convenient location (Optional)
 If you are the administrator on your computer, you may want to place your `spigot-1.13.2.jar` file, which is required to export your plugins, in a convenient location. Head to your `C:\` directory and make a new folder called `Eclipse-APIs` and drop the `spigot-1.13.2.jar` file here.
 
-By doing this, the demo plugins will work **out of the box** without any build path configuration.
+By doing this, the demo plugins will work **out of the box** without any build path configuration. Otherwise, you will have to right click the project, go to `Build Path`>`Configure Build Path`>Double Click `spigot-1.13.2.jar`>Find and select your `spigot-1.13.2.jar` file. A copy is provided in the `Startup Files.zip` file from this repository.
 
 # Creating projects
 
-// TODO
+### Create a new project
+1. Right click the blank space in the `Project Explorer` window and select `New`>`Project...`. This will open the `Select a wizard` dialogue.
+1. Expand the `Java` folder and select `Java Project`
+1. Name your project. I recommend using TitleCase. For example purposes, we'll call ours `DemoProject`. Press `Finish`.
+1. If you used TitleCase, a popup will ask you to change the module name to fit conventions, so change it to all lowercase. For example purposes, ours will be `demoproject`.
+1. Eclipse will open the `module-info.java` file. Add `requires spigot;` to the module section. Press `ctrl+s` to save the file. It will look something like this:
+```java
+/**
+ * 
+ */
+/**
+ * @author infinitymeme
+ *
+ */
+module demoproject {
+	requires spigot;
+}
+```
+Don't worry that spigot is underlined in red. We're about to fix that.
+### Configure the build path
+1. Right click the project and go to `Build Path`>`Configure Build Path`.
+1. Highlight `Modulepath` and press `Add External JARs`.
+1. Navigate to and select your `spigot-1.13.2.jar` file.
+1. Expand the dropdown next to your jar file. Double click on `Javadoc location` and set `Javadoc location path:` to `https://hub.spigotmc.org/javadocs/spigot/overview-summary.html`, then press `Finish`.
+1. Ensure that the `JRE System Library` is set to `[JavaSE-11]`. If this is not the case, double click on the field and choose `JavaSE-11 (jdk-11.0.2)` from the `Execution environment` dropdown, then press `Finish`.
+1. Press `Apply and Close`.
+Your build path should end up looking like this:
+![Setup Image 5](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/esetup05.png?raw=true)
 
+### Create a new package and Main method
+1. Right click on `src` and select `New`>`Package`.
+1. Name the package following this name convention: `com.modulename.authorname`. These should be the same values in the `module-info.java` file.
+![Setup Image 4](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/esetup04.png?raw=true)
+1. Press `Finish`.
+1. Right click the package and select `New`>`Class`. Name it `Main`.
+1. Add `extends JavaPlugin` to the class definition. Eclipse will underline `JavaPlugin`, so hover over it and select `Import JavaPlugin (org.bukkit.plugin.java)`.
+1. Add `onEnable()` and `onDisable()` methods with `@Override` headers. Your `Main.java` file should now look like this:
+```java
+package com.infinitymeme.demoproject;
+
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class Main extends JavaPlugin {
+	
+	@Override
+	public void onEnable() {
+	}
+
+	@Override
+	public void onDisable() {
+	}
+	
+}
+```
+
+### Create a plugin.yml
+1. Right click the project file (`DemoProject` in this case) and select `New`>`File`.
+1. Name the file `plugin.yml`
+1. Fill the file with the following information:
+```
+version: 1.0
+api-version: 1.13
+name: ProjectName
+main: com.author.projectname.Main
+author: author
+description: description
+```
+For this example, it looks like this:
+```
+version: 1.0
+api-version: 1.13
+name: DemoProject
+main: com.infinitymeme.demoproject.Main
+author: infinitymeme
+description: it's a demo
+```
 
 # Useful Techniques
 Making plugins all comes down to creativity, both in the function of the plugin and in the design of its code. This section gives templates of techniques to get what you want done quickly and efficiently.
@@ -255,3 +335,13 @@ Pretty clean right? We even can say how many seconds it has been and do a specia
 Notice that any static data (in this case the initial amount of starting seconds) must be carried through local variables alongside the dynamic data (in this case the remaining seconds).
 
 You can find examples of this across all of the provided plugins, but most are too complex to explain concisely here.
+
+
+# Exporting projects
+
+1. Right click on the project folder (for example, `DemoPath`)
+1. Select `Export`
+1. Expand the `Java` folder and select `JAR file`
+1. Press `Next >`.
+1. Press `Browse` to select the export destination and jar file name. This will most likely be in your `server/plugins/` directory.
+1. Press `Finish`.
