@@ -369,7 +369,71 @@ public void actionBar(String msg, Player p) {
 }
 ```
 ![Color Codes Chart](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/colorcodes.png?raw=true)
+
 Note that the function replaces the ampersand `&` with the section symbol `§` for convenience. You will need to modify it if you wish to use the symbol normally.
+
+## Custom Items / Recipes
+For custom recipes, I recommend adding a load function for each, and having the constructor (generally `onEnable()` since recipes are often in main) call it. Here's a template.
+```java
+public void loadYOURITEM() {
+	NamespacedKey self = new NamespacedKey(this, "YOURITEM");
+	ItemStack item = new ItemStack(Material.RESULTING_ITEM, RESULTING_ITEM_COUNT);
+	ShapedRecipe recipe = new ShapedRecipe(self, item);
+	recipe.shape("aaa","bbb","ccc");
+	recipe.setIngredient('a', Material.ITEM_ONE);
+	recipe.setIngredient('b', Material.ITEM_TWO);
+	recipe.setIngredient('c', Material.ITEM_THREE);
+	this.getServer().addRecipe(recipe);
+}
+```
+
+For custom items, they are often differentiated by a custom name or lore, and obtained through a custom recipe. In order to compare the custom item to the item in events, you should store it to an `ItemStack` instance variable. Let's make a hot potato item as an example.
+```java
+public class Main extends JavaPlugin {
+
+	private ItemStack hotpotato;
+	
+	@Override
+	public void onEnable() {
+		loadHotPotato();
+	}
+	
+	public void loadHotPotato() {
+		NamespacedKey self = new NamespacedKey(this, "hotpotato");
+		ItemStack item = new ItemStack(Material.BAKED_POTATO, 1);
+		ItemMeta meta = item.getItemMeta();
+		meta.setDisplayName(ChatColor.RESET +""+ ChatColor.RED +""+ ChatColor.BOLD+"Hot Potato");
+		LinkedList<String> lore = new LinkedList<String>();
+		lore.add(ChatColor.RESET +""+ ChatColor.RED +""+ ChatColor.ITALIC+"WATCH OUT! IT'S HOT!");
+		meta.setLore(lore);
+		item.setItemMeta(meta);
+		
+		this.hotpotato = item;
+		
+		ShapedRecipe recipe = new ShapedRecipe(self, item);
+		recipe.shape("xxx","xox","xxx");
+		recipe.setIngredient('x', Material.LAVA_BUCKET);
+		recipe.setIngredient('o', Material.BAKED_POTATO);
+		this.getServer().addRecipe(recipe);
+	}
+
+}
+```
+Note that when you compare to an ItemStack from an event, you may have to remove additional information from the event's ItemStack to make it match. For example, if you wanted to check if a player is holding the lazer rifle regardless of its enchantments and quantity, you might do the following:
+```java
+public ItemStack ignoreCount(ItemStack item) {
+	ItemStack i = item.clone(); //clone the item so we can set its unimportant properties to be correct without modifying the original itemstack
+	i.setAmount(1); //we don't care about count, so set it to the original recipe count
+	return i;
+}
+
+//so then to compare we do...
+ItemStack eventitem = e.getItem()//item from somewhere, could be 64 hot potatoes.
+if (ignoreCount(eventitem).equals(hotpotato)) doHotPotatoExplosion(e.getLocation());
+```
+
+## More Techniques
+There are certainly more things you can do in plugins, but this is where I stop holding your hand. Google is your best friend, and you have 4 example plugins that you can dig through for reference. The code should be *relatively* well-written.
 
 # Exporting Projects
 
