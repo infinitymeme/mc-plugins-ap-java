@@ -107,7 +107,11 @@ Note: If you enable this mode, the server will identify your username as a new p
 
 # Setting up eclipse
 
-Start eclipse. Uncheck `Show Welcome Screen` box and close the welcome window.
+1. Start eclipse.
+2. Uncheck the `Always show Welcome at start up` box in the bottom right
+3. Close the welcome window.
+
+![Setup Image 1](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/esetup01.png?raw=true)
 
 ### Getting rid of extra windows
 
