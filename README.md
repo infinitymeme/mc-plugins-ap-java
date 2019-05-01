@@ -105,7 +105,7 @@ Switch over to the console and type `stop`. It will stop and then promp you to r
 
 Note: If you enable this mode, the server will identify your username as a new player, so you will have to re-op yourself. Your inventory will also reset.
 
-# Setting up eclipse
+# Setting Up Eclipse
 
 1. Start eclipse.
 1. Uncheck the `Always show Welcome at start up` box in the bottom right
@@ -131,7 +131,7 @@ If you are the administrator on your computer, you may want to place your `spigo
 
 By doing this, the demo plugins will work **out of the box** without any build path configuration. Otherwise, you will have to right click the project, go to `Build Path`>`Configure Build Path`>Double Click `spigot-1.13.2.jar`>Find and select your `spigot-1.13.2.jar` file. A copy is provided in the `Startup Files.zip` file from this repository.
 
-# Creating projects
+# Creating Projects
 
 ### Create a new project
 1. Right click the blank space in the `Project Explorer` window and select `New`>`Project...`. This will open the `Select a wizard` dialogue.
@@ -162,7 +162,7 @@ Don't worry that spigot is underlined in red. We're about to fix that.
 Your build path should end up looking like this:
 ![Setup Image 5](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/esetup05.png?raw=true)
 
-### Create a new package and Main method
+### Create a new package and Main class
 1. Right click on `src` and select `New`>`Package`.
 1. Name the package following this name convention: `com.modulename.authorname`. These should be the same values in the `module-info.java` file.
 ![Setup Image 4](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/esetup04.png?raw=true)
@@ -491,7 +491,7 @@ There are certainly more things you can do in plugins, but this is where I stop 
 
 # Exporting Projects
 
-1. Right click on the project folder (for example, `DemoPath`)
+1. Right click on the project folder (for example, `DemoProject`)
 1. Select `Export`
 1. Expand the `Java` folder and select `JAR file`
 1. Press `Next >`.
