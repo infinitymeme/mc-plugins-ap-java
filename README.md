@@ -428,8 +428,62 @@ public ItemStack ignoreCount(ItemStack item) {
 }
 
 //so then to compare we do...
-ItemStack eventitem = e.getItem()//item from somewhere, could be 64 hot potatoes.
-if (ignoreCount(eventitem).equals(hotpotato)) doHotPotatoExplosion(e.getLocation());
+public static void onEvent (Event e) {
+	ItemStack eventitem = e.getItem(); //item from some event, could be 64 hot potatoes.
+	if (ignoreCount(eventitem).equals(hotpotato)) doHotPotatoExplosion(e.getLocation());
+}
+```
+
+## Commands
+There's a lot you can do with commands, but here's the basic rundown.
+
+
+### Create the command
+This function is your template for creating any command.
+```java
+public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+}
+```
+First you will need to check the command name.
+```java
+if (cmd.getName.equals("YOURCOMMAND")) {
+}
+```
+For some commands, you may wish that only players or only the console be able to execute it.
+```java
+if (sender instanceof Player) {
+	//players only
+} else {
+	//console only
+}
+```
+
+Arguments are passed in through the `String[] args` parameter. Arguments are separated by a space, so the command `/setname billy bob` will call the function with `cmd.getName()` resolving to `setname` and `args` containing `{"billy", "bob"}`. Ensure that you validate all argument parameters.
+
+Finally, this function returns a boolean. Return `false` if the command parameters are determined to be invalid. (For example, if a number is given instead of a player username). This will display the Usage message (see below) to the sender. Otherwise, return `true` once the command completes.
+
+If something went wrong but the command syntax was correct, like if your command teleports the player to the target block but they weren't looking at any block, you can use `sender.sendMessage()` to let them know what went wrong.
+
+### Modify plugin.yml
+Once you write your command, you will need to add it to the `plugin.yml` file. This is where you can add aliases (other names / shortcuts for the command), and specific permissions if you have a permissions manager. Here's the template from earlier with commands added:
+```
+version: 1.0
+api-version: 1.13
+name: ProjectName
+main: com.author.projectname.Main
+author: author
+description: description
+commands:
+    command_one:
+        aliases: [cmd_one, uno]
+        description: this is a command. you need permission to use it.
+        permission: projectname.permissionname
+        usage: "Usage: /command_one [player] [number]"
+    command_two:
+        aliases: [cmd_two, dos]
+        description: anyone can use me
+        usage: "Usage: /command_two [number]"
+
 ```
 
 ## More Techniques
@@ -443,3 +497,11 @@ There are certainly more things you can do in plugins, but this is where I stop 
 1. Press `Next >`.
 1. Press `Browse` to select the export destination and jar file name. This will most likely be in your `server/plugins/` directory.
 1. Press `Finish`.
+
+## Running and Testing Your Plugins
+
+While you can export the plugin jar files to any location, if you want your plugins to load into your server, you must place them in the `plugins` folder within the server directory.
+
+You can export and overwrite plugin jars while the server is running, then use the command `/reload confirm` in Minecraft to reload all plugins on the server.
+
+While you can use `System.out.println()` to send messages to the console, it is often more useful to use `Bukkit.broadcastMessage()` to send them to the chat so you don't have to tab back to the console.
