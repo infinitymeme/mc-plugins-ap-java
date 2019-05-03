@@ -126,6 +126,8 @@ If one of these windows is missing, go under `Window`>`Show View`> and select th
 ### Importing this repository's demo projects (Optional)
 Close eclipse and navigate to your eclipse workspace. This will likely be at `C:\Users\YourLoginAccount\eclipse-workspace\`. Copy the contents of this repository's `eclipse-workspace` folder to your `eclipse-workspace` folder.
 
+In Eclipse, go to `File`>`Open Projects from File System` and paste your eclipse workspace directory (most likely `C:\Users\YourLoginAccount\eclipse-workspace\`) in the `Import Source:` field. Press `Finish`.
+
 ### Placing your API jar in a convenient location (Optional)
 If you are the administrator on your computer, you may want to place your `spigot-1.13.2.jar` file, which is required to export your plugins, in a convenient location. Head to your `C:\` directory and make a new folder called `Eclipse-APIs` and drop the `spigot-1.13.2.jar` file here.
 
