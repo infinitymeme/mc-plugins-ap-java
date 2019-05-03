@@ -180,7 +180,7 @@ Your build path should end up looking like this:
 
 ### Create a new package and Main class
 1. Right click on `src` and select `New`>`Package`.
-1. Name the package following this name convention: `com.modulename.authorname`. These should be the same values in the `module-info.java` file.
+1. Name the package following this name convention: `com.authorname.modulename`. These should be the same values in the `module-info.java` file.
 ![Setup Image 4](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/esetup04.png?raw=true)
 1. Press `Finish`.
 1. Right click the package and select `New`>`Class`. Name it `Main`.
