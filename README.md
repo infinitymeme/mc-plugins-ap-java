@@ -154,11 +154,12 @@ module demoproject {
 Don't worry that spigot is underlined in red. We're about to fix that.
 ### Configure the build path
 1. Right click the project and go to `Build Path`>`Configure Build Path`.
+1. Switch to the `Libraries` tab.
 1. Highlight `Modulepath` and press `Add External JARs`.
 1. Navigate to and select your `spigot-1.13.2.jar` file.
 1. Expand the dropdown next to your jar file. Double click on `Javadoc location` and set `Javadoc location path:` to `https://hub.spigotmc.org/javadocs/spigot/overview-summary.html`, then press `Finish`.
-1. Ensure that the `JRE System Library` is set to `[JavaSE-11]`. If this is not the case, double click on the field and choose `JavaSE-11 (jdk-11.0.2)` from the `Execution environment` dropdown, then press `Finish`.
-1. Press `Apply and Close`.
+1. Ensure that the `JRE System Library` is set to `[JavaSE-11]`. If this is not the case, double click on the field and choose `JavaSE-11 (jdk-11.0.2)` from the `Execution environment` dropdown. If you do not have `JavaSE-11 (jdk-11.0.2)` as an option, expand the dropdown below and follow the steps.
+1. Press `Finish` then `Apply and Close`.
 Your build path should end up looking like this:
 ![Setup Image 5](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/esetup05.png?raw=true)
 
