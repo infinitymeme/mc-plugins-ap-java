@@ -478,10 +478,10 @@ Arguments are passed in through the `String[] args` parameter. Arguments are sep
 
 Finally, this function returns a boolean. Return `false` if the command parameters are determined to be invalid. (For example, if a number is given instead of a player username). This will display the Usage message (see below) to the sender. Otherwise, return `true` once the command completes.
 
-If something went wrong but the command syntax was correct, like if your command teleports the player to the target block but they weren't looking at any block, you can use `sender.sendMessage()` to let them know what went wrong.
+If something went wrong but the command syntax was correct, like if your command teleports the player to the target block but they weren't looking at any block, return `true` and use `sender.sendMessage()` to let them know what went wrong.
 
 ### Modify plugin.yml
-Once you write your command, you will need to add it to the `plugin.yml` file. This is where you can add aliases (other names / shortcuts for the command), and specific permissions if you have a permissions manager. Here's the template from earlier with commands added:
+Once you write your command, you will need to add it to the `plugin.yml` file. This is where you can add aliases (other names / shortcuts for the command), and specific permissions if you have a permissions manager. This is also where you specify the Usage message to be displayed if the command arguments are incorrect. Here's the template from earlier with commands added:
 ```
 version: 1.0
 api-version: 1.13
