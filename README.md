@@ -183,7 +183,7 @@ Your build path should end up looking like this:
 1. Name the package following this name convention: `com.authorname.modulename`. These should be the same values in the `module-info.java` file.
 ![Setup Image 4](https://github.com/ferisril000/mc-plugins-ap-java/blob/images/esetup04.png?raw=true)
 1. Press `Finish`.
-1. Right click the package and select `New`>`Class`. Name it `Main`.
+1. Right click the package and select `New`>`Class`. Name it `Main` and press `Finish`.
 1. Add `extends JavaPlugin` to the class definition. Eclipse will underline `JavaPlugin`, so hover over it and select `Import JavaPlugin (org.bukkit.plugin.java)`.
 1. Add `onEnable()` and `onDisable()` methods with `@Override` headers. Your `Main.java` file should now look like this:
 ```java
