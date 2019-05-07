@@ -1,5 +1,6 @@
 package com.infinitymeme.lazertag;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
 import org.bukkit.Bukkit;
@@ -57,6 +58,8 @@ public class Main extends JavaPlugin implements Listener {
 	
 	private LinkedList<Player> firecooldown;
 	
+	private LinkedHashMap<Player, Integer> streak;
+	
 	private ItemStack lazerrifle;
 	
 	
@@ -76,6 +79,8 @@ public class Main extends JavaPlugin implements Listener {
 		blueteam = new LinkedList<Player>();
 		
 		firecooldown = new LinkedList<Player>();
+		
+		streak = new LinkedHashMap<Player, Integer>();
 		
 		loadLazerRifle();
 		
@@ -184,7 +189,35 @@ public class Main extends JavaPlugin implements Listener {
             fw.setSilent(true);
             
 			p.setGameMode(GameMode.SPECTATOR);
-			p.sendTitle("", "Eliminated by "+tagger.getName(), 5, RESPAWN_TIME-5, 5);
+			p.sendTitle("", "Eliminated by "+chatColor(teamValue(tagger))+tagger.getName(), 5, RESPAWN_TIME-5, 5);
+			Bukkit.broadcastMessage(chatColor(teamValue(tagger))+tagger.getName()+ChatColor.GOLD+" eliminated "+chatColor(teamValue(p))+p.getName());
+			System.out.println(streak);
+			
+			if (!streak.containsKey(tagger)) streak.put(tagger,0);
+			int s = streak.get(tagger);
+			s++;
+			streak.put(tagger,s); 
+			switch (s) {
+			case 5:
+				Bukkit.broadcastMessage(chatColor(teamValue(tagger))+tagger.getName()+ChatColor.GOLD+" is dominating! (5)");
+				break;
+			case 10:
+				Bukkit.broadcastMessage(chatColor(teamValue(tagger))+tagger.getName()+ChatColor.GOLD+" is unstoppable! (10)");
+				break;
+			case 15:
+				Bukkit.broadcastMessage(chatColor(teamValue(tagger))+tagger.getName()+ChatColor.GOLD+" is godlike! (15)");
+				break;
+			case 20:
+				Bukkit.broadcastMessage(chatColor(teamValue(tagger))+tagger.getName()+ChatColor.GOLD+" is an Epic Gamer! (20)");
+				break;
+			}
+			if (streak.containsKey(p)) {
+				int ss = streak.get(p);
+				if (ss > 5) {
+					Bukkit.broadcastMessage(chatColor(teamValue(tagger))+tagger.getName()+ChatColor.GOLD+" shutdown "+chatColor(teamValue(p))+p.getName()+ChatColor.GOLD+"'s streak of "+ss+"!");
+				}
+				streak.put(p,0);
+			}
 			final Location nextl = p.getLocation();
 			Bukkit.getScheduler().runTaskLater(this, new Runnable() {public void run() {
 				tag(p, tagger, tick+1, nextl, gm);
@@ -219,6 +252,11 @@ public class Main extends JavaPlugin implements Listener {
 		return p[teamvalue+1];
 	}
 	
+	public ChatColor chatColor(int teamvalue) {
+		ChatColor[] p = {ChatColor.RED, ChatColor.GRAY, ChatColor.BLUE};
+		return p[teamvalue+1];
+	}
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player) {
 			if (cmd.getName().equals("ltspawn")) {
@@ -250,10 +288,20 @@ public class Main extends JavaPlugin implements Listener {
 				} else if (args[0].equals("none")) {
 					if (redteam.contains(p)) redteam.remove(p);
 					if (blueteam.contains(p)) blueteam.remove(p);
+					if (streak.containsKey(p)) streak.remove(p);
 					return true;
 				}
 				
 			}
+		} else if (cmd.getName().equals("resetgame")) {
+			for (Player p : Bukkit.getOnlinePlayers()) {
+				streak.put(p, 0);
+				p.getInventory().setHeldItemSlot(0);
+				p.getInventory().setItemInMainHand(lazerrifle);
+				if (teamValue(p) == TEAM_BLUE) p.teleport(bluespawn);
+				else if (teamValue(p) == TEAM_RED) p.teleport(redspawn);
+			}
+			return true;
 		}
 	return false;
 	}
