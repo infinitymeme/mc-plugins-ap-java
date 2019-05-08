@@ -1,0 +1,3 @@
+module flamethrower {
+	requires spigot;
+}
