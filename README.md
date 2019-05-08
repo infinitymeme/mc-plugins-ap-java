@@ -503,7 +503,7 @@ commands:
 ```
 
 ## More Techniques
-There are certainly more things you can do in plugins, but this is where I stop holding your hand. Google is your best friend, and you have 4 example plugins that you can dig through for reference. The code should be *relatively* well-written.
+There are certainly more things you can do in plugins, but this is where I stop holding your hand. Google is your best friend, and you have a few example plugins that you can dig through for reference. The code should be *relatively* well-written.
 
 # Exporting Projects
 
