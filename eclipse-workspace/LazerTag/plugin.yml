@@ -19,3 +19,6 @@ commands:
         description: teleport all players to spawnpoints and reset streaks
         permission: lazertag.resetgame
         usage: "Usage: /resetgame"
+    respawn:
+        aliases: [r]
+        description: respawn yourself and reset your streak

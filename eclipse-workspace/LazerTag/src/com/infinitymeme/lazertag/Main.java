@@ -25,6 +25,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
@@ -123,6 +124,12 @@ public class Main extends JavaPlugin implements Listener {
 		}
 	}
 	
+	@EventHandler
+	public void onDrop(PlayerDropItemEvent e) {
+		if (teamValue(e.getPlayer())!=0) {
+			e.setCancelled(true);
+		}
+	}
 	
 	public int teamDiff(Player p, Player pp) {//1 same team, -1 diff team, 0 no team
 		return teamValue(p)*teamValue(pp);
@@ -189,7 +196,7 @@ public class Main extends JavaPlugin implements Listener {
             fw.setSilent(true);
             
 			p.setGameMode(GameMode.SPECTATOR);
-			p.sendTitle("", "Eliminated by "+chatColor(teamValue(tagger))+tagger.getName(), 5, RESPAWN_TIME-5, 5);
+			p.sendTitle("", ChatColor.GOLD+"Eliminated by "+chatColor(teamValue(tagger))+tagger.getName(), 5, RESPAWN_TIME-5, 5);
 			Bukkit.broadcastMessage(chatColor(teamValue(tagger))+tagger.getName()+ChatColor.GOLD+" eliminated "+chatColor(teamValue(p))+p.getName());
 			System.out.println(streak);
 			
@@ -213,7 +220,7 @@ public class Main extends JavaPlugin implements Listener {
 			}
 			if (streak.containsKey(p)) {
 				int ss = streak.get(p);
-				if (ss > 5) {
+				if (ss >= 5) {
 					Bukkit.broadcastMessage(chatColor(teamValue(tagger))+tagger.getName()+ChatColor.GOLD+" shutdown "+chatColor(teamValue(p))+p.getName()+ChatColor.GOLD+"'s streak of "+ss+"!");
 				}
 				streak.put(p,0);
@@ -242,18 +249,18 @@ public class Main extends JavaPlugin implements Listener {
 		}
 	}
 	
-	public Particle particleColor(int teamvalue) {
+	public Particle particleColor(int teamvalue) { //color you fire with
 		Particle[] p = {Particle.DRIP_WATER, Particle.TOWN_AURA, Particle.DRIP_LAVA};
 		return p[teamvalue+1];
 	}
 	
-	public Color fireworkColor(int teamvalue) {
+	public Color fireworkColor(int teamvalue) { //color you explode in
 		Color[] p = {Color.RED, Color.GRAY, Color.BLUE};
 		return p[teamvalue+1];
 	}
 	
-	public ChatColor chatColor(int teamvalue) {
-		ChatColor[] p = {ChatColor.RED, ChatColor.GRAY, ChatColor.BLUE};
+	public ChatColor chatColor(int teamvalue) { //color of your name
+		ChatColor[] p = {ChatColor.BLUE, ChatColor.GRAY, ChatColor.RED};
 		return p[teamvalue+1];
 	}
 	
@@ -302,6 +309,12 @@ public class Main extends JavaPlugin implements Listener {
 				else if (teamValue(p) == TEAM_RED) p.teleport(redspawn);
 			}
 			return true;
+		} else if (cmd.getName().equals("respawn")) {
+			Player p = (Player) sender;
+			p.getInventory().setHeldItemSlot(0);
+			p.getInventory().setItemInMainHand(lazerrifle);
+			if (teamValue(p) == TEAM_BLUE) p.teleport(bluespawn);
+			else if (teamValue(p) == TEAM_RED) p.teleport(redspawn);
 		}
 	return false;
 	}
