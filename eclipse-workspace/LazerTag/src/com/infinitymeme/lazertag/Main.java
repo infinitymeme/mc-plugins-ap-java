@@ -24,15 +24,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -63,6 +64,17 @@ public class Main extends JavaPlugin implements Listener {
 	
 	private ItemStack lazerrifle;
 	
+	private ItemStack bluehelmet;
+	private ItemStack bluechestplate;
+	private ItemStack blueleggings;
+	private ItemStack blueboots;
+	
+	private ItemStack redhelmet;
+	private ItemStack redchestplate;
+	private ItemStack redleggings;
+	private ItemStack redboots;
+	
+	
 	
 	//TEAM CONSTANTS
 	private static final int TEAM_BLUE = -1;
@@ -83,6 +95,7 @@ public class Main extends JavaPlugin implements Listener {
 		
 		streak = new LinkedHashMap<Player, Integer>();
 		
+		loadArmor();
 		loadLazerRifle();
 		
 	}
@@ -94,13 +107,13 @@ public class Main extends JavaPlugin implements Listener {
 	
 	@EventHandler
 	public void onClick(PlayerInteractEvent e) {
-		if (e.getHand().equals(EquipmentSlot.HAND)) {
-			String action = e.getAction().name();
-			if ((action.equals("RIGHT_CLICK_AIR"))||(action.equals("RIGHT_CLICK_BLOCK"))) {
-				Player p = e.getPlayer();
-				ItemStack hand = p.getInventory().getItemInMainHand();
-				if ((hand != null)&&(hand.equals(lazerrifle))) {
-					e.setCancelled(true);
+		if ((e.getHand()!=null)&&(e.getHand().equals(EquipmentSlot.HAND))) {
+			Player p = e.getPlayer();
+			ItemStack hand = p.getInventory().getItemInMainHand();
+			if ((hand != null)&&(hand.equals(lazerrifle))) {
+				e.setCancelled(true);
+				String action = e.getAction().name();
+				if ((action.equals("RIGHT_CLICK_AIR"))||(action.equals("RIGHT_CLICK_BLOCK"))) {
 					if ((!firecooldown.contains(p))) {
 						firecooldown.add(p);
 						Bukkit.getScheduler().runTaskLaterAsynchronously(this, new Runnable() {public void run() {
@@ -108,7 +121,7 @@ public class Main extends JavaPlugin implements Listener {
 						}},FIRE_COOLDOWN);
 						Player hit = fireLazer(p);
 						if (hit != null) {
-							tag(hit, p, 0, p.getLocation(), p.getGameMode());
+							tag(hit, p, 0, p.getLocation());
 						}
 					}
 					
@@ -118,8 +131,8 @@ public class Main extends JavaPlugin implements Listener {
 	}
 	
 	@EventHandler
-	public void onDamage(EntityDamageEvent e) { //fall damage canceler for those playing
-		if ((e.getEntity() instanceof Player)&&(e.getCause().equals(DamageCause.FALL))&&teamValue((Player)e.getEntity())!=0) {
+	public void onDamage(EntityDamageEvent e) { //damage canceler for those playing
+		if ((e.getEntity() instanceof Player)&&(teamValue((Player)e.getEntity())!=0)) {
 			e.setCancelled(true);
 		}
 	}
@@ -159,12 +172,12 @@ public class Main extends JavaPlugin implements Listener {
 			for (Entity ent:l.getWorld().getNearbyEntities(l, HITBOX_SIZE, HITBOX_SIZE, HITBOX_SIZE)) {
 				if (ent instanceof Player) {
 					Player entp = (Player) ent;
-					if ((!entp.equals(p))&&(!entp.getGameMode().equals(GameMode.SPECTATOR))) {
+					if ((!entp.equals(p))&&(entp.getGameMode().equals(GameMode.ADVENTURE))) {
 						if ((entp.getLocation().distance(l) < nearest)||(entp.getEyeLocation().distance(l) < nearest)) np = (Player) ent;
 					}
 				}
 			}
-			if ((np != null)&&(teamDiff(p, np) <= TEAM_NONE)) { //none or enemy team
+			if ((np != null)&&(teamDiff(p, np) <= TEAM_NONE)) { //enemy team or no team
 				return np;
 			}
 			l.add(v);
@@ -177,7 +190,7 @@ public class Main extends JavaPlugin implements Listener {
 		return null;
 	}
 	
-	public void tag(Player p, Player tagger, int tick, Location l, GameMode gm) {
+	public void tag(Player p, Player tagger, int tick, Location l) {
 		if (tick == 0) {
 			p.playEffect(EntityEffect.HURT);
 			
@@ -196,9 +209,9 @@ public class Main extends JavaPlugin implements Listener {
             fw.setSilent(true);
             
 			p.setGameMode(GameMode.SPECTATOR);
+			p.removePotionEffect(PotionEffectType.SPEED);
 			p.sendTitle("", ChatColor.GOLD+"Eliminated by "+chatColor(teamValue(tagger))+tagger.getName(), 5, RESPAWN_TIME-5, 5);
 			Bukkit.broadcastMessage(chatColor(teamValue(tagger))+tagger.getName()+ChatColor.GOLD+" eliminated "+chatColor(teamValue(p))+p.getName());
-			System.out.println(streak);
 			
 			if (!streak.containsKey(tagger)) streak.put(tagger,0);
 			int s = streak.get(tagger);
@@ -223,15 +236,19 @@ public class Main extends JavaPlugin implements Listener {
 				if (ss >= 5) {
 					Bukkit.broadcastMessage(chatColor(teamValue(tagger))+tagger.getName()+ChatColor.GOLD+" shutdown "+chatColor(teamValue(p))+p.getName()+ChatColor.GOLD+"'s streak of "+ss+"!");
 				}
-				streak.put(p,0);
 			}
 			final Location nextl = p.getLocation();
 			Bukkit.getScheduler().runTaskLater(this, new Runnable() {public void run() {
-				tag(p, tagger, tick+1, nextl, gm);
+				tag(p, tagger, tick+1, nextl);
 				fw.detonate();
 			}},1);
 		} else if (tick < RESPAWN_TIME) {
-			p.teleport(l.setDirection(homingvector(p.getEyeLocation(), tagger.getEyeLocation())));
+			try { //homingvector errors if same location, which can only really happen if p spectates their tagger. this escapes that.
+				p.teleport(l.setDirection(homingvector(p.getEyeLocation(), tagger.getEyeLocation())));
+			} catch (Exception ex) {
+				p.setSpectatorTarget(null);
+			}
+			
 			for (int i=SLOW_THRESHOLD.length-1; i>=0; i--) {
 				if (p.getLocation().distance(tagger.getLocation()) >= SLOW_THRESHOLD[i]) {
 					p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, i, false, false, false), true);
@@ -239,13 +256,11 @@ public class Main extends JavaPlugin implements Listener {
 				}
 			}
 			Bukkit.getScheduler().runTaskLater(this, new Runnable() {public void run() {
-				tag(p, tagger, tick+1, l, gm);
+				tag(p, tagger, tick+1, l);
 			}},1);
 		} else {
-			if (teamValue(p) == TEAM_BLUE) p.teleport(bluespawn);
-			else if (teamValue(p) == TEAM_RED) p.teleport(redspawn);
-			p.setGameMode(gm);
 			p.removePotionEffect(PotionEffectType.SLOW);
+			resetPlayer(p);
 		}
 	}
 	
@@ -300,23 +315,85 @@ public class Main extends JavaPlugin implements Listener {
 				}
 				
 			}
-		} else if (cmd.getName().equals("resetgame")) {
+		} else if (cmd.getName().equals("respawnall")) {
 			for (Player p : Bukkit.getOnlinePlayers()) {
-				streak.put(p, 0);
-				p.getInventory().setHeldItemSlot(0);
-				p.getInventory().setItemInMainHand(lazerrifle);
-				if (teamValue(p) == TEAM_BLUE) p.teleport(bluespawn);
-				else if (teamValue(p) == TEAM_RED) p.teleport(redspawn);
+				resetPlayer(p);
 			}
 			return true;
 		} else if (cmd.getName().equals("respawn")) {
-			Player p = (Player) sender;
-			p.getInventory().setHeldItemSlot(0);
-			p.getInventory().setItemInMainHand(lazerrifle);
-			if (teamValue(p) == TEAM_BLUE) p.teleport(bluespawn);
-			else if (teamValue(p) == TEAM_RED) p.teleport(redspawn);
+			resetPlayer((Player) sender);
+			
 		}
 	return false;
+	}
+	
+	public void resetPlayer(Player p) {
+		p.getInventory().setHeldItemSlot(0);
+		p.getInventory().setItemInMainHand(lazerrifle);
+		if (teamValue(p) == TEAM_BLUE) {
+			p.teleport(bluespawn);
+			PlayerInventory i = p.getInventory();
+			i.setHelmet(bluehelmet);
+			i.setChestplate(bluechestplate);
+			i.setLeggings(blueleggings);
+			i.setBoots(blueboots);
+			
+		}
+		else if (teamValue(p) == TEAM_RED) {
+			p.teleport(redspawn);
+			PlayerInventory i = p.getInventory();
+			i.setHelmet(redhelmet);
+			i.setChestplate(redchestplate);
+			i.setLeggings(redleggings);
+			i.setBoots(redboots);
+		}
+		p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100000, 2, false, false, false), true);
+		p.setGameMode(GameMode.ADVENTURE);
+		streak.put(p,0);
+		
+	}
+	
+	public void loadArmor() {
+		bluehelmet = new ItemStack(Material.LEATHER_HELMET, 1);
+		LeatherArmorMeta bhm = ((LeatherArmorMeta) bluehelmet.getItemMeta());
+		bhm.setColor(Color.BLUE);
+		bluehelmet.setItemMeta(bhm);
+		
+		bluechestplate = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
+		LeatherArmorMeta bcm = ((LeatherArmorMeta) bluechestplate.getItemMeta());
+		bcm.setColor(Color.BLUE);
+		bluechestplate.setItemMeta(bhm);
+		
+		blueleggings = new ItemStack(Material.LEATHER_LEGGINGS, 1);
+		LeatherArmorMeta blm = ((LeatherArmorMeta) blueleggings.getItemMeta());
+		blm.setColor(Color.BLUE);
+		blueleggings.setItemMeta(bhm);
+		
+		blueboots = new ItemStack(Material.LEATHER_BOOTS, 1);
+		LeatherArmorMeta bbm = ((LeatherArmorMeta) blueboots.getItemMeta());
+		bbm.setColor(Color.BLUE);
+		blueboots.setItemMeta(bbm);
+		
+		
+		redhelmet = new ItemStack(Material.LEATHER_HELMET, 1);
+		LeatherArmorMeta rhm = ((LeatherArmorMeta) redhelmet.getItemMeta());
+		rhm.setColor(Color.RED);
+		redhelmet.setItemMeta(rhm);
+		
+		redchestplate = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
+		LeatherArmorMeta rcm = ((LeatherArmorMeta) redchestplate.getItemMeta());
+		rcm.setColor(Color.RED);
+		redchestplate.setItemMeta(rcm);
+		
+		redleggings = new ItemStack(Material.LEATHER_LEGGINGS, 1);
+		LeatherArmorMeta rlm = ((LeatherArmorMeta) redleggings.getItemMeta());
+		rlm.setColor(Color.RED);
+		redleggings.setItemMeta(rlm);
+		
+		redboots = new ItemStack(Material.LEATHER_BOOTS, 1);
+		LeatherArmorMeta rbm = ((LeatherArmorMeta) redboots.getItemMeta());
+		rbm.setColor(Color.RED);
+		redboots.setItemMeta(rbm);
 	}
 
 	

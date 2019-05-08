@@ -14,8 +14,8 @@ commands:
         aliases: []
         description: set a player's team
         usage: "Usage: /team [red:blue:none]"
-    resetgame:
-        aliases: []
+    respawnall:
+        aliases: [ra]
         description: teleport all players to spawnpoints and reset streaks
         permission: lazertag.resetgame
         usage: "Usage: /resetgame"
