@@ -24,8 +24,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -46,7 +48,7 @@ public class Main extends JavaPlugin implements Listener {
 	//BEGIN CONFIGURATION
 	private static final double HITBOX_SIZE = 0.5;
 	private static final int MAX_DISTANCE = 100;
-	private static final int FIRE_COOLDOWN = 20;
+	private static final int FIRE_COOLDOWN = 10;
 	private static final int RESPAWN_TIME = 5*20;
 	private static final int[] SLOW_THRESHOLD = {6, 8, 10, 12, 14, 16};
 	//END CONFIGURATION
@@ -116,11 +118,10 @@ public class Main extends JavaPlugin implements Listener {
 				if ((action.equals("RIGHT_CLICK_AIR"))||(action.equals("RIGHT_CLICK_BLOCK"))) {
 					if ((!firecooldown.contains(p))) {
 						firecooldown.add(p);
-						Bukkit.getScheduler().runTaskLaterAsynchronously(this, new Runnable() {public void run() {
+						Bukkit.getScheduler().runTaskLater(this, new Runnable() {public void run() {
 							firecooldown.remove(p);
 						}},FIRE_COOLDOWN);
-						Player hit = fireLazer(p);
-						if (hit != null) {
+						for (Player hit : fireLazer(p)) {
 							tag(hit, p, 0, p.getLocation());
 						}
 					}
@@ -138,7 +139,21 @@ public class Main extends JavaPlugin implements Listener {
 	}
 	
 	@EventHandler
-	public void onDrop(PlayerDropItemEvent e) {
+	public void onDrop(PlayerDropItemEvent e) { //drop canceler for those playing
+		if (teamValue(e.getPlayer())!=0) {
+			e.setCancelled(true);
+		}
+	}
+	
+	@EventHandler
+	public void onInvMove(InventoryClickEvent e) { //inv edit canceler for those playing
+		if (teamValue((Player)e.getWhoClicked())!=0) {
+			e.setCancelled(true);
+		}
+	}
+	
+	@EventHandler
+	public void onSwapHands(PlayerSwapHandItemsEvent e) { //hand swap canceler for those playing
 		if (teamValue(e.getPlayer())!=0) {
 			e.setCancelled(true);
 		}
@@ -160,12 +175,13 @@ public class Main extends JavaPlugin implements Listener {
 		return v;
 	}
 	
-	public Player fireLazer(Player p) {
+	public LinkedList<Player> fireLazer(Player p) {
+		LinkedList<Player> hit = new LinkedList<Player>();
 		Location l = p.getEyeLocation();
 		Vector v = l.getDirection();
 		l.add(v.multiply(0.5));
 		int distance=0;
-		while ((l.getBlock().getType().equals(Material.AIR)||(l.getBlock().getType().equals(Material.CAVE_AIR)))&&(distance<MAX_DISTANCE)) {
+		while ((l.getBlock().getType().equals(Material.AIR)||(l.getBlock().getType().equals(Material.CAVE_AIR))||(l.getBlock().getType().equals(glassColor(teamValue(p)))))&&(distance<MAX_DISTANCE)) {
 			l.getWorld().spawnParticle(particleColor(teamValue(p)), l, 1);
 			Player np = null;
 			double nearest = HITBOX_SIZE+1;
@@ -177,8 +193,8 @@ public class Main extends JavaPlugin implements Listener {
 					}
 				}
 			}
-			if ((np != null)&&(teamDiff(p, np) <= TEAM_NONE)) { //enemy team or no team
-				return np;
+			if ((np != null)&&(teamDiff(p, np) <= TEAM_NONE)&&(!hit.contains(np))) { //enemy team or no team
+				hit.add(np);
 			}
 			l.add(v);
 			distance++;
@@ -187,7 +203,7 @@ public class Main extends JavaPlugin implements Listener {
 			p.getWorld().playEffect(l, Effect.STEP_SOUND, l.getBlock().getType(), 100);
 		}
 
-		return null;
+		return hit;
 	}
 	
 	public void tag(Player p, Player tagger, int tick, Location l) {
@@ -279,6 +295,11 @@ public class Main extends JavaPlugin implements Listener {
 		return p[teamvalue+1];
 	}
 	
+	public Material glassColor(int teamvalue) { //glass you can shoot through
+		Material[] p = {Material.BLUE_STAINED_GLASS, Material.GRAY_STAINED_GLASS, Material.RED_STAINED_GLASS};
+		return p[teamvalue+1];
+	}
+	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player) {
 			if (cmd.getName().equals("ltspawn")) {
@@ -299,18 +320,22 @@ public class Main extends JavaPlugin implements Listener {
 				if ((args.length >= 2)&&((sender.hasPermission("lazertag.team.others")||(!(sender instanceof Player))))) p = Bukkit.getPlayer(args[1]);
 				else p = (Player) sender;
 				
-				if (args[0].equals("red")) {
-					if (blueteam.contains(p)) blueteam.remove(p);
-					redteam.add(p);
-					return true;
-				} else if (args[0].equals("blue")) {
-					if (redteam.contains(p)) redteam.remove(p);
-					blueteam.add(p);
-					return true;
-				} else if (args[0].equals("none")) {
-					if (redteam.contains(p)) redteam.remove(p);
-					if (blueteam.contains(p)) blueteam.remove(p);
-					if (streak.containsKey(p)) streak.remove(p);
+				if ((sender.hasPermission("lazertag.admin"))||(teamValue(p)==TEAM_NONE)) {
+					if (args[0].equals("red")) {
+						if (blueteam.contains(p)) blueteam.remove(p);
+						redteam.add(p);
+						return true;
+					} else if (args[0].equals("blue")) {
+						if (redteam.contains(p)) redteam.remove(p);
+						blueteam.add(p);
+						return true;
+					} else if (args[0].equals("none")) {
+						if (redteam.contains(p)) redteam.remove(p);
+						if (blueteam.contains(p)) blueteam.remove(p);
+						if (streak.containsKey(p)) streak.remove(p);
+						return true;
+					}
+				} else {
 					return true;
 				}
 				
@@ -319,10 +344,20 @@ public class Main extends JavaPlugin implements Listener {
 			for (Player p : Bukkit.getOnlinePlayers()) {
 				resetPlayer(p);
 			}
+			firecooldown = new LinkedList<Player>();
 			return true;
 		} else if (cmd.getName().equals("respawn")) {
-			resetPlayer((Player) sender);
-			
+			if ((args.length > 0)&&(sender.hasPermission("lazertag.admin"))) {
+				Player p = Bukkit.getPlayer(args[0]);
+				if (p!=null) {
+					resetPlayer(p);
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				resetPlayer((Player) sender);
+			}
 		}
 	return false;
 	}
