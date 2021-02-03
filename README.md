@@ -1,4 +1,5 @@
 # mc-plugins-ap-java
+This project is an in-depth walkthrough on the creation of Minecraft plugins in Java. Includes software installation, jar setup, and programming techniques.
 
 # Useful Links
 [Spigot API Documentation](https://hub.spigotmc.org/javadocs/spigot/overview-summary.html)
